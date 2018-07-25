@@ -1,0 +1,19 @@
+{
+  "name": "news-webhooks",
+  "version": "1.0.0",
+  "description": "diaglogflow webhook",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Hugo Vican",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "unirest": "^0.5.1"
+  },
+  "engines": {
+    "node": "8.9.1"
+  }
+}
