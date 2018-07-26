@@ -8,7 +8,7 @@ let errorResponse = {
     results: []
 };
 var port = process.env.PORT || 8080;
-var apiKey = '&apiKey=dc7a99af9cc6432e9791af434a6f1328';
+var apiKey = 'dc7a99af9cc6432e9791af434a6f1328';
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
