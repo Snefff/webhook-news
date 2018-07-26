@@ -21,5 +21,8 @@ The response will be like :
 response {
   speech : "",
   displayText : "",
-  payload : Object
+  message : [{
+      type : "4",
+      payload : Object
+  }]
 }
