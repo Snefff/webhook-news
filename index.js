@@ -78,11 +78,11 @@ server.post('/getNews',function (request,response)  {
                             "type" : "card",
                             "title" : article[i].title,
                             "image" : article[i].urlToImage,
-                            "buttons" : {
+                            "buttons" : [{
                                 "type" : "button",
                                 "text" : "Voir en détail",
                                 "value" : article[i].url
-                            }
+                            }]
                         };
                     }
                     console.log(JSON.stringify({
