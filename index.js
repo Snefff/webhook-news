@@ -73,7 +73,7 @@ server.post('/getNews',function (request,response)  {
                     let article = res.body.articles;
                     console.log(article);
                     let text = "Voici les news :\n";
-                    let output = ""
+                    let output = Array(10);
                     for(let i = 0; i<article.length;i++) {
                         output[i] = {
                             "type" : "card",
