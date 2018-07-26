@@ -69,14 +69,12 @@ server.post('/getNews',function (request,response)  {
                         "speech" : "Error. Can you try it again ? ",
                         "displayText" : "Error. Can you try it again ? "
                     }));
-                } else {
-                    console.log(res.body);
-                } 
-                if(res.body.totalResults > 0) {
+                } else if(res.body.totalResults > 0) {
                     let article = res.body.articles;
+                    console.log(article);
                     let output = '';
-                    for(let i = 0; i<articles.length;i++) {
-                        output += articles[i].title;
+                    for(let i = 0; i<article.length;i++) {
+                        output += article[i].title;
                         output+="\n"
                     }
                     response.setHeader('Content-Type', 'application/json');
