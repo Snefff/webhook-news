@@ -69,7 +69,10 @@ server.post('/getNews',function (request,response)  {
                         "speech" : "Error. Can you try it again ? ",
                         "displayText" : "Error. Can you try it again ? "
                     }));
-                } else if(res.body.results.length > 0) {
+                } else {
+                    console.log(res);
+                } 
+                if(res.body.results.length > 0) {
                     let article = res.body.article;
                     let output = '';
                     for(let i = 0; i<article.length;i++) {
