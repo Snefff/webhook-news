@@ -32,6 +32,25 @@ server.post('/get',function (request,response) {
   })); 
 })
 
+server.post('/',function (request,response) {
+    var param = request.body.result;
+    console.log('test');
+    switch(param['test']) {
+      case test1 :
+        console.log('test 1');
+      break;
+      case test2 :
+        console.log('test 2');
+      break;
+      default:
+        console.log('test default');
+    }
+    response.setHeader('Content-Type', 'application/json');
+      response.send(JSON.stringify({
+      "speech" : "Hello from /get :)",
+      "displayText" : "Hello from /get :)"
+    })); 
+  })
 
 server.post('/getNews',function (request,response)  {
     if(request.body.result.parameters['top-headline']) {
