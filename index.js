@@ -56,8 +56,8 @@ server.post('/getNews',function (request,response)  {
     if(request.body.result.parameters['top-headline']) {
         var req = unirest("GET", "https://newsapi.org/v2/top-headlines?apiKey="+apiKey);
             req.query({
-                "pageSize": "3" || request.body.result.parameters['page'],
-                "language": "fr" || request.body.result.parameters['lang'],
+                "pageSize": "4" || request.body.result.parameters['page'],
+                "country": "fr" || request.body.result.parameters['lang'],
                 "category": "general" || request.body.result.parameters['category']
             });
             console.log(req);
