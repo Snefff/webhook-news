@@ -101,10 +101,13 @@ server.post('/getNews',function (request,response)  {
                     response.send(JSON.stringify({
                         "speech" : text,
                         "displayText" : text,
-                        "payload" : {
+                        "message" : {
+                            "type" : "4",
+                            "payload" : {
                                         "gogowego" : {
                                             "attachments" : output                                           
                                         }
+                            }
                         }
                     })); 
                 }
