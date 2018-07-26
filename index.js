@@ -54,12 +54,11 @@ server.post('/',function (request,response) {
 
 server.post('/getNews',function (request,response)  {
     if(request.body.result.parameters['top-headline']) {
-        var req = unirest("GET", "https://newsapi.org/v2/top-headline?");
+        var req = unirest("GET", "https://newsapi.org/v2/top-headlines?apiKey="+apiKey);
             req.query({
                 "page": "1" || request.body.result.parameters['page'],
                 "language": "fr" || request.body.result.parameters['lang'],
-                "category": "general" || request.body.result.parameters['category'],
-                "apiKey": apiKey
+                "category": "general" || request.body.result.parameters['category']
             });
             console.log(req);
             req.send("{}");
