@@ -61,6 +61,7 @@ server.post('/getNews',function (request,response)  {
                 "category": "general" || request.body.result.parameters['category'],
                 "apiKey": apiKey
             });
+            console.log(req);
             req.send("{}");
             req.end(function(res) {
                 if(res.error) {
