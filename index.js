@@ -56,7 +56,7 @@ server.post('/getNews',function (request,response)  {
     if(request.body.result.parameters['top-headline']) {
         var req = unirest("GET", "https://newsapi.org/v2/top-headlines?apiKey="+apiKey);
             req.query({
-                "page": "1" || request.body.result.parameters['page'],
+                "pageSize": "3" || request.body.result.parameters['page'],
                 "language": "fr" || request.body.result.parameters['lang'],
                 "category": "general" || request.body.result.parameters['category']
             });
@@ -70,13 +70,13 @@ server.post('/getNews',function (request,response)  {
                         "displayText" : "Error. Can you try it again ? "
                     }));
                 } else {
-                    console.log(res);
+                    console.log(res.body);
                 } 
-                if(res.body.results.length > 0) {
-                    let article = res.body.article;
+                if(res.body.totalResults > 0) {
+                    let article = res.body.articles;
                     let output = '';
-                    for(let i = 0; i<article.length;i++) {
-                        output += article[i].title;
+                    for(let i = 0; i<articles.length;i++) {
+                        output += articles[i].title;
                         output+="\n"
                     }
                     response.setHeader('Content-Type', 'application/json');
