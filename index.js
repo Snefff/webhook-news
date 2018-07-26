@@ -60,7 +60,7 @@ server.post('/getNews',function (request,response)  {
                 "country": "fr" || request.body.result.parameters['lang'],
                 "category": "general" || request.body.result.parameters['category']
             });
-            console.log(req);
+            console.log(request);
             req.send("{}");
             req.end(function(res) {
                 if(res.error) {
