@@ -72,8 +72,8 @@ server.post('/getNews',function (request,response)  {
                 } else if(res.body.totalResults > 0) {
                     let article = res.body.articles;
                     let text = "Voici les news :\n";
-                    let output = Array(10);
-                    for(let i = 0; i<Math.min(article.length,5);i++) {
+                    let output = Array(article.length);
+                    for(let i = 0; i<article.length;i++) {
                         output[i] = {
                             "type" : "card",
                             "title" : article[i].title,
