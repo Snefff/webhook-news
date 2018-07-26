@@ -57,7 +57,7 @@ server.post('/getNews',function (request,response)  {
         var req = unirest("GET", "https://newsapi.org/v2/top-headline?");
             req.query({
                 "page": "1" || request.body.result.parameters['page'],
-                "language": fr || request.body.result.parameters['lang'],
+                "language": "fr" || request.body.result.parameters['lang'],
                 "category": "general" || request.body.result.parameters['category'],
                 "apiKey": apiKey
             });
