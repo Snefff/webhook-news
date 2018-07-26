@@ -71,7 +71,6 @@ server.post('/getNews',function (request,response)  {
                     }));
                 } else if(res.body.totalResults > 0) {
                     let article = res.body.articles;
-                    console.log(article);
                     let text = "Voici les news :\n";
                     let output = Array(10);
                     for(let i = 0; i<article.length;i++) {
@@ -86,7 +85,15 @@ server.post('/getNews',function (request,response)  {
                             }
                         };
                     }
-                    console.log(output);
+                    console.log(JSON.stringify({
+                        "speech" : text,
+                        "displayText" : text,
+                        "payload" : {
+                                        "gogowego" : {
+                                            "attachments" : output                                           
+                                        }
+                        }
+                    }));
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
                         "speech" : text,
