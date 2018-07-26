@@ -88,10 +88,13 @@ server.post('/getNews',function (request,response)  {
                     console.log(JSON.stringify({
                         "speech" : text,
                         "displayText" : text,
-                        "payload" : {
+                        "message" : {
+                            "type" : "4",
+                            "payload" : {
                                         "gogowego" : {
                                             "attachments" : output                                           
                                         }
+                            }
                         }
                     }));
                     response.setHeader('Content-Type', 'application/json');
