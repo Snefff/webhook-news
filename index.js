@@ -72,15 +72,29 @@ server.post('/getNews',function (request,response)  {
                 } else if(res.body.totalResults > 0) {
                     let article = res.body.articles;
                     console.log(article);
-                    let output = '';
+                    let text = "Voici les news :\n";
+                    let output = ""
                     for(let i = 0; i<article.length;i++) {
-                        output += article[i].title;
-                        output+="\n"
+                        output[i] = {
+                            "type" : "card",
+                            "title" : article[i].title,
+                            "image" : article[i].urlToImage,
+                            "buttons" : {
+                                "type" : "button",
+                                "text" : "Voir en détail",
+                                "value" : article[i].url
+                            }
+                        };
                     }
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
-                        "speech" : output,
-                        "displayText" : output
+                        "speech" : text,
+                        "displayText" : text,
+                        "payload" : {
+                                        "gogowego" : {
+                                            "attachments" : output                                           
+                                        }
+                        }
                     })); 
                 }
             });
