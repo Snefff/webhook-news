@@ -99,19 +99,12 @@ server.post('/getNews',function (request,response)  {
                     }));
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
-                        "message" : [
-                            {
-                                "type" : 0,
-                                "speech" : text
-                            }
-                            ,{
-                                "type" : 4,
-                                "payload" : {
+                            "speech" : text,
+                            "payload" : {
                                         "gogowego" : {
                                             "attachments" : output   
                                         }                                        
                             }
-                        }]
                     })); 
                 }
             });
