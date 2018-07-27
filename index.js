@@ -75,9 +75,9 @@ server.post('/getNews',function (request,response)  {
                     let output = Array(article.length);
                     for(let i = 0; i<article.length;i++) {
                         output[i] = {
-                            "type" : "card",
+                            "type" : 1,
                             "title" : article[i].title,
-                            "image" : article[i].urlToImage,
+                            "imageUrl" : article[i].urlToImage,
                             "buttons" : [{
                                 "type" : "button",
                                 "text" : "Voir en détail",
@@ -89,7 +89,7 @@ server.post('/getNews',function (request,response)  {
                         "speech" : text,
                         "displayText" : text,
                         "message" : {
-                            "type" : 4,
+                            "type" : 1,
                             "payload" : {
                                         "gogowego" : {
                                             "attachments" : output                                           
@@ -100,11 +100,7 @@ server.post('/getNews',function (request,response)  {
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
                             "speech" : text,
-                            "data" : {
-                                        "gogowego" : {
-                                            "attachments" : output   
-                                        }                                        
-                            }
+                            "message" : output
                     })); 
                 }
             });
