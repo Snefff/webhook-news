@@ -102,7 +102,7 @@ server.post('/getNews',function (request,response)  {
                         "speech" : text,
                         "displayText" : text,
                         "message" : [{
-                            "type" : "4",
+                            "type" : 4,
                             "payload" : {
                                         "gogowego" : {
                                             "attachments" : output                                           
