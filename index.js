@@ -92,7 +92,7 @@ server.post('/getNews',function (request,response)  {
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
                             "speech" : text,
-                            "displayText" : output
+                            "data" : output
                     })); 
                 }
             });
