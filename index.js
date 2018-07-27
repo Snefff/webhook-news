@@ -79,7 +79,7 @@ server.post('/getNews',function (request,response)  {
                             "title" : article[i].title,
                             "image" : article[i].urlToImage,
                             "buttons" : [{
-                                "type" : "button",
+                                "type" : "link",
                                 "text" : "Voir en détail",
                                 "value" : article[i].url
                             }]
