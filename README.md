@@ -22,7 +22,7 @@ response {
   speech : "",
   displayText : "",
   message : [{
-      type : "4",
+      type : 4,
       payload : Object
   }]
 }
