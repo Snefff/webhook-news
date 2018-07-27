@@ -75,9 +75,9 @@ server.post('/getNews',function (request,response)  {
                     let output = Array(article.length);
                     for(let i = 0; i<article.length;i++) {
                         output[i] = {
-                            "type" : 1,
+                            "type" : "card",
                             "title" : article[i].title,
-                            "imageUrl" : article[i].urlToImage,
+                            "image" : article[i].urlToImage,
                             "buttons" : [{
                                 "type" : "button",
                                 "text" : "Voir en détail",
@@ -92,11 +92,11 @@ server.post('/getNews',function (request,response)  {
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
                             "speech" : text,
-                            "data" : {
+                            "data" : [{
                                 "gogowego" : {
                                     "attachments" :output
                                 }
-                            }
+                            }]
                     })); 
                 }
             });
