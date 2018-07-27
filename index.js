@@ -89,7 +89,7 @@ server.post('/getNews',function (request,response)  {
                         "speech" : text,
                         "displayText" : text,
                         "message" : {
-                            "type" : "4",
+                            "type" : 4,
                             "payload" : {
                                         "gogowego" : {
                                             "attachments" : output                                           
@@ -99,14 +99,17 @@ server.post('/getNews',function (request,response)  {
                     }));
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
-                        "speech" : text,
-                        "displayText" : text,
-                        "message" : [{
-                            "type" : 4,
-                            "payload" : {
+                        "message" : [
+                            {
+                                "type" : 0,
+                                "speech" : text
+                            }
+                            ,{
+                                "type" : 4,
+                                "payload" : {
                                         "gogowego" : {
-                                            "attachments" : output                                           
-                                        }
+                                            "attachments" : output   
+                                        }                                        
                             }
                         }]
                     })); 
