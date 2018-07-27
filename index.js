@@ -87,20 +87,12 @@ server.post('/getNews',function (request,response)  {
                     }
                     console.log(JSON.stringify({
                         "speech" : text,
-                        "displayText" : text,
-                        "message" : {
-                            "type" : 1,
-                            "payload" : {
-                                        "gogowego" : {
-                                            "attachments" : output                                           
-                                        }
-                            }
-                        }
+                        "displayText" : output                                           
                     }));
                     response.setHeader('Content-Type', 'application/json');
                     response.send(JSON.stringify({
                             "speech" : text,
-                            "message" : output
+                            "displayText" : output
                     })); 
                 }
             });
