@@ -54,7 +54,7 @@ server.post('/', function (request, response) {
 
 server.post('/getNews', function (request, response) {
     var url = "https://newsapi.org/v2/"
-        + request.body.result.parameters['top-headline'] ? "top-headlines" : "everything"
+        + request.body.result.parameters['top-headline']!="" ? "top-headlines" : "everything"
         + "?apiKey=" + apiKey;
     var req = unirest("GET", url);
     req.query({
@@ -62,7 +62,7 @@ server.post('/getNews', function (request, response) {
         "page": request.body.result.parameters['page'] || "1",
         "country": request.body.result.parameters['sys.language'] || "fr",
     });
-    (request.body.result.parameters['top-headline'] ?
+    (request.body.result.parameters['top-headline']!="" ?
             req.query({ "category" : "general" || request.body.result.parameters['category']})
             : 0 );
     console.log(req);
