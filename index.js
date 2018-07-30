@@ -13,161 +13,97 @@ var apiKey = 'dc7a99af9cc6432e9791af434a6f1328';
 const server = express();
 server.use(bodyParser.json());
 
-server.post('/get',function (request,response) {
-  var param = request.body.result;
-  switch(param['test']) {
-    case test1 :
-      console.log('test 1');
-    break;
-    case test2 :
-      console.log('test 2');
-    break;
-    default:
-      console.log('test default');
-  }
-  response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify({
-    "speech" : "Hello from /get :)",
-    "displayText" : "Hello from /get :)"
-  })); 
-})
-
-server.post('/',function (request,response) {
-    var param = request.body.result;
-    console.log('test');
-    switch(param['test']) {
-      case test1 :
-        console.log('test 1');
-      break;
-      case test2 :
-        console.log('test 2');
-      break;
-      default:
-        console.log('test default');
+server.post('/get', function (request, response) {
+    var param = request.body.result.parameters;
+    switch (param['test']) {
+        case test1:
+            console.log('test 1');
+            break;
+        case test2:
+            console.log('test 2');
+            break;
+        default:
+            console.log('test default');
     }
     response.setHeader('Content-Type', 'application/json');
-      response.send(JSON.stringify({
-      "speech" : "Hello from /get :)",
-      "displayText" : "Hello from /get :)"
-    })); 
-  })
+    response.send(JSON.stringify({
+        "speech": "Hello from /get :)",
+        "displayText": "Hello from /get :)"
+    }));
+})
 
-server.post('/getNews',function (request,response)  {
-    if(request.body.result.parameters['top-headline']) {
-        var req = unirest("GET", "https://newsapi.org/v2/top-headlines?apiKey="+apiKey);
-            req.query({
-                "pageSize": "4" || request.body.result.parameters['page'],
-                "country": "fr" || request.body.result.parameters['lang'],
-                "category": "general" || request.body.result.parameters['category']
-            });
-            console.log(request);
-            req.send("{}");
-            req.end(function(res) {
-                if(res.error) {
-                    response.setHeader('Content-Type', 'application/json');
-                    response.send(JSON.stringify({
-                        "speech" : "Error. Can you try it again ? ",
-                        "displayText" : "Error. Can you try it again ? "
-                    }));
-                } else if(res.body.totalResults > 0) {
-                    let article = res.body.articles;
-                    let text = "Voici les news :\n";
-                    let output = Array(article.length);
-                    for(let i = 0; i<article.length;i++) {
-                        output[i] = {
-                            "type" : "card",
-                            "title" : article[i].title,
-                            "image" : article[i].urlToImage,
-                            "buttons" : [{
-                                "type" : "link",
-                                "text" : "Voir en détail",
-                                "value" : article[i].url
-                            }]
-                        };
-                    }
-                    console.log(JSON.stringify({
-                        "speech" : text,
-                        "displayText" : output                                           
-                    }));
-                    response.setHeader('Content-Type', 'application/json');
-                    response.send(JSON.stringify({
-                            "speech" : text,
-                            "data" : [{
-                                "gogowego" : {
-                                    "attachments" :output
-                                }
-                            }]
-                    })); 
-                }
-            });
+server.post('/', function (request, response) {
+    var param = request.body.result.parameters;
+    console.log('test');
+    switch (param['test']) {
+        case test1:
+            console.log('test 1');
+            break;
+        case test2:
+            console.log('test 2');
+            break;
+        default:
+            console.log('test default');
     }
-    /* else if(request.body.result.parameters['source-name']) {
-     //   console.log('popular-movies param found');
-        let movie = request.body.result.parameters['source-name'];
-        var req = unirest("GET", "https://api.themoviedb.org/3/search/movie");
-            req.query({
-                "include_adult": "false",
-                "page": "1",
-                "query":movie,
-                "language": "en-US",
-                "api_key": ""
-            });
-            req.send("{}");
-            req.end(function(res) {
-                if(res.error) {
-                    response.setHeader('Content-Type', 'application/json');
-                    response.send(JSON.stringify({
-                        "speech" : "Error. Can you try it again ? ",
-                        "displayText" : "Error. Can you try it again ? "
-                    }));
-                } else if(res.body.results.length > 0) {
-                let result = res.body.results[0];
-                let output = "Average Rating : " + result.vote_average + 
-                "\n Plot : " + result.overview + "url" + result.poster_path
-                    response.setHeader('Content-Type', 'application/json');
-                    response.send(JSON.stringify({
-                        "speech" : output,
-                        "displayText" : output
-                    }));
-                } else {
-                    response.setHeader('Content-Type', 'application/json');
-                    response.send(JSON.stringify({
-                        "speech" : "Couldn't find any deatails. :(  ",
-                        "displayText" : "Couldn't find any deatails. :(  "
-                    }));
-                }
-            });
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify({
+        "speech": "Hello from /get :)",
+        "displayText": "Hello from /get :)"
+    }));
+})
 
-    } else if(request.body.result.parameters['theme-name']) {    
-        var req = unirest("GET", "https://api.themoviedb.org/3/movie/popular");
-            req.query({
-                "page": "1",
-                "language": "en-US",
-                "api_key": ""
-            });
-            req.send("{}");
-            req.end(function(res){
-                if(res.error) {
-                    response.setHeader('Content-Type', 'application/json');
-                    response.send(JSON.stringify({
-                        "speech" : "Error. Can you try it again ? ",
-                        "displayText" : "Error. Can you try it again ? "
-                    }));
-                } else {
-                    let result = res.body.results;
-                    let output = '';
-                    for(let i = 0; i < result.length;i++) {
-                        output += result[i].title;
-                        output+="\n"
+server.post('/getNews', function (request, response) {
+    var url = "https://newsapi.org/v2/"
+        + request.body.result.parameters['top-headline'] ? "top-headlines" : "everything"
+        + "?apiKey=" + apiKey;
+    var req = unirest("GET", url);
+    req.query({
+        "pageSize": "4",
+        "page": request.body.result.parameters['page'],
+        "country": "fr" || request.body.result.parameters['sys.language'],
+        "category": (request.body.result.parameters['top-headline'] ?
+            "general" || request.body.result.parameters['category']
+            : "")
+    });
+    console.log(request);
+    console.log(req);
+    req.send("{}");
+    req.end(function (res) {
+        if (res.error) {
+            response.setHeader('Content-Type', 'application/json');
+            response.send(JSON.stringify({
+                "speech": "Error. Can you try it again ? ",
+                "displayText": "Error. Can you try it again ? "
+            }));
+        } else if (res.body.totalResults > 0) {
+            let article = res.body.articles;
+            let text = "Voici les news :\n";
+            let output = Array(article.length);
+            for (let i = 0; i < article.length; i++) {
+                output[i] = {
+                    "type": "card",
+                    "title": article[i].title,
+                    "image": article[i].urlToImage,
+                    "buttons": [{
+                        "type": "link",
+                        "text": "Voir en détail",
+                        "value": article[i].url
+                    }]
+                };
+            }
+
+            response.setHeader('Content-Type', 'application/json');
+            response.send(JSON.stringify({
+                "speech": text,
+                "displayText": text,
+                "data": [{
+                    "gogowego": {
+                        "attachments": output
                     }
-                    response.setHeader('Content-Type', 'application/json');
-                    response.send(JSON.stringify({
-                        "speech" : output,
-                        "displayText" : output
-                    })); 
-                }
-            });
-    } */
+                }]
+            }));
+        }
+    });
 });
 /*
 server.get('/getNewsName',function (req,res){
