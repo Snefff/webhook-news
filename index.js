@@ -60,7 +60,6 @@ server.post('/getNews', function (request, response) {
     req.query({
         "pageSize": "4",
         "page": request.body.result.parameters['page'] || "1",
-        "country": request.body.result.parameters['sys.language'] || "fr",
     });
     (request.body.result.parameters['top-headline']!="" ?
             req.query({ "category" : request.body.result.parameters['category'] || "general",
