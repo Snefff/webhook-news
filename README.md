@@ -12,6 +12,9 @@ request {
     result : {
       parameters : {
         top-headline : "" // anything else than blank means true
+        sys.language : // fr(default)|en
+        pageSize : number of news returned per page
+        category : //category of the news general(default)|business|entertainment|health|science|sports|technology
       }
     }
   }
@@ -21,8 +24,7 @@ The response will be like :
 response {
   speech : "",
   displayText : "",
-  message : [{
-      type : 4,
-      payload : Object
+  data : [{
+      Anything you want here.
   }]
 }
