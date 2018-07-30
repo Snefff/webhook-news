@@ -54,7 +54,7 @@ server.post('/', function (request, response) {
 
 server.post('/getNews', function (request, response) {
     var url = "https://newsapi.org/v2/"
-        + request.body.result.parameters['top-headline']!="" ? "top-headlines" : "everything"
+        + (request.body.result.parameters['top-headline']!="" ? "top-headlines" : "everything")
         + "?apiKey=" + apiKey;
     var req = unirest("GET", url);
     req.query({
@@ -69,6 +69,7 @@ server.post('/getNews', function (request, response) {
     req.send("{}");
     req.end(function (res) {
         if (res.error) {
+            console.log(res.error);
             response.setHeader('Content-Type', 'application/json');
             response.send(JSON.stringify({
                 "speech": "Error. Can you try it again ? ",
