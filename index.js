@@ -88,6 +88,7 @@ server.post('/getNews', function (request, response) {
                     "type": "card",
                     "title": article[i].title,
                     "image": article[i].urlToImage,
+                    "subtitle" : article[i].description,
                     "buttons": [{
                         "type": "link",
                         "text": "Voir en détail",
