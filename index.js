@@ -59,13 +59,12 @@ server.post('/getNews', function (request, response) {
     var req = unirest("GET", url);
     req.query({
         "pageSize": "4",
-        "page": request.body.result.parameters['page'],
-        "country": "fr" || request.body.result.parameters['sys.language'],
-        "category": (request.body.result.parameters['top-headline'] ?
-            "general" || request.body.result.parameters['category']
-            : "")
+        "page": request.body.result.parameters['page'] || "1",
+        "country": request.body.result.parameters['sys.language'] || "fr",
     });
-    console.log(request);
+    (request.body.result.parameters['top-headline'] ?
+            req.query({ "category" : "general" || request.body.result.parameters['category']})
+            : 0 );
     console.log(req);
     req.send("{}");
     req.end(function (res) {
