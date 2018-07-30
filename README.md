@@ -20,7 +20,7 @@ request {
   }
 }
 
-The response will be like :/n
+The response will be like :
 response {
   speech : "",
   displayText : "",
