@@ -63,8 +63,10 @@ server.post('/getNews', function (request, response) {
         "country": request.body.result.parameters['sys.language'] || "fr",
     });
     (request.body.result.parameters['top-headline']!="" ?
-            req.query({ "category" : "general" || request.body.result.parameters['category']})
-            : 0 );
+            req.query({ "category" : request.body.result.parameters['category'] || "general",
+                        "country": request.body.result.parameters['sys.language'] || "fr"
+            })
+            : req.query({ "language" : request.body.result.parameters['sys.language'] || "fr" }) );
     console.log(req);
     req.send("{}");
     req.end(function (res) {
