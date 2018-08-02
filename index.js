@@ -72,7 +72,7 @@ server.post('/getNews', function (request, response) {
         } else if (res.body.totalResults > 0) {
             let article = res.body.articles;
             let text = "Voici les news";
-            if(request.body.result.parameters['source']!= "") {
+            if(request.body.result.parameters['source']!= "" && request.body.result.parameters['source']!= undefined ) {
                 text += " de " + request.body.result.parameters['source'];
             }else if(request.body.result.parameters['category']!= "") {
                 text += " correspondates"
