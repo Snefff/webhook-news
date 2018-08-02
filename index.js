@@ -34,17 +34,6 @@ server.post('/get', function (request, response) {
 
 server.post('/', function (request, response) {
     var param = request.body.result.parameters;
-    console.log('test');
-    switch (param['test']) {
-        case test1:
-            console.log('test 1');
-            break;
-        case test2:
-            console.log('test 2');
-            break;
-        default:
-            console.log('test default');
-    }
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify({
         "speech": "Hello from /get :)",
@@ -53,6 +42,7 @@ server.post('/', function (request, response) {
 })
 
 server.post('/getNews', function (request, response) {
+    console.log(request.body.result.parameters['top-headline']!="")
     var url = "https://newsapi.org/v2/"
         + (request.body.result.parameters['top-headline']!="" 
         || request.body.result.parameters['source']=="" ? "top-headlines" : "everything")
@@ -65,10 +55,10 @@ server.post('/getNews', function (request, response) {
     (request.body.result.parameters['top-headline']!="" 
     || request.body.result.parameters['source']=="" ?
             req.query({ "category" : request.body.result.parameters['category'] || "general",
-                        "country": request.body.result.parameters['sys.language'] || "fr"
+                        "country": request.body.result.parameters['language'] || "fr"
             })
             :req.query({"sources": request.body.result.parameters['source'], 
-                        "language" : request.body.result.parameters['sys.language'] || "fr" }) );
+                        "language" : request.body.result.parameters['language'] || "fr" }) );
     console.log(req);
     req.send("{}");
     req.end(function (res) {
@@ -81,7 +71,11 @@ server.post('/getNews', function (request, response) {
             }));
         } else if (res.body.totalResults > 0) {
             let article = res.body.articles;
-            let text = "Voici les news :\n";
+            let text = "Voici les news";
+            if(res.body.result.parameters['source']!= "") {
+                text += " de " + res.body.result.parameters['source'];
+            }
+                text += " :\n";
             let output = Array(article.length);
             for (let i = 0; i < article.length; i++) {
                 output[i] = {
