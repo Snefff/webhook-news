@@ -14,7 +14,7 @@ const server = express();
 server.use(bodyParser.json());
 
 server.post('/get', function (request, response) {
-    var param = request.body.result.parameters;
+    var param = request.body.intent.inputs;
     switch (param['test']) {
         case test1:
             console.log('test 1');
@@ -33,7 +33,7 @@ server.post('/get', function (request, response) {
 })
 
 server.post('/', function (request, response) {
-    var param = request.body.result.parameters;
+    var param = request.body.intent.inputs;
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify({
         "speech": "Hello from /get :)",
@@ -42,23 +42,23 @@ server.post('/', function (request, response) {
 })
 
 server.post('/getNews', function (request, response) {
-    console.log(request);
+    console.log(request.body.intent.inputs);
     var url = "https://newsapi.org/v2/"
-        + (request.body.result.parameters['top-headline']!="" 
-        || request.body.result.parameters['source']=="" ? "top-headlines" : "everything")
+        + (request.body.intent.inputs['top-headline']!="" 
+        || request.body.intent.inputs['source']=="" ? "top-headlines" : "everything")
         + "?apiKey=" + apiKey;
     var req = unirest("GET", url);
     req.query({
         "pageSize": "4",
-        "page": request.body.result.parameters['page'] || "1",
+        "page": request.body.intent.inputs['page'] || "1",
     });
-    (request.body.result.parameters['top-headline']!="" 
-    || request.body.result.parameters['source']=="" ?
-            req.query({ "category" : request.body.result.parameters['category'] || "general",
-                        "country": request.body.result.parameters['language'] || "fr"
+    (request.body.intent.inputs['top-headline']!="" 
+    || request.body.intent.inputs['source']=="" ?
+            req.query({ "category" : request.body.intent.inputs['category'] || "general",
+                        "country": request.body.intent.inputs['language'] || "fr"
             })
-            :req.query({"sources": request.body.result.parameters['source'], 
-                        "language" : request.body.result.parameters['language'] || "fr" }) );
+            :req.query({"sources": request.body.intent.inputs['source'], 
+                        "language" : request.body.intent.inputs['language'] || "fr" }) );
     console.log(req);
     req.send("{}");
     req.end(function (res) {
@@ -72,9 +72,9 @@ server.post('/getNews', function (request, response) {
         } else if (res.body.totalResults > 0) {
             let article = res.body.articles;
             let text = "Voici les news";
-            if(request.body.result.parameters['source']!= "" && request.body.result.parameters['source']!= undefined ) {
-                text += " de " + request.body.result.parameters['source'];
-            }else if(request.body.result.parameters['category']!= "") {
+            if(request.body.intent.inputs['source']!= "" && request.body.intent.inputs['source']!= undefined ) {
+                text += " de " + request.body.intent.inputs['source'];
+            }else if(request.body.intent.inputs['category']!= "") {
                 text += " correspondates"
             }
                 text += " :\n";
@@ -105,8 +105,8 @@ server.post('/getNews', function (request, response) {
 server.get('/getNewsName',function (req,res){
   var req = unirest("GET", "https://newsapi.org/v2/sources?"+apiKey);
   req.query({
-      "category": request.body.result.parameters['category'],
-      "language": request.body.result.parameters['language'],
+      "category": request.body.intent.inputs['category'],
+      "language": request.body.intent.inputs['language'],
       "country": requesst.body.result.parameters['country']
   });
   req.send("{}");
