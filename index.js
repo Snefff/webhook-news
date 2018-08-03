@@ -42,7 +42,7 @@ server.post('/', function (request, response) {
 })
 
 server.post('/getNews', function (request, response) {
-    console.log(request.body.result.parameters['top-headline']!="")
+    console.log(request.body);
     var url = "https://newsapi.org/v2/"
         + (request.body.result.parameters['top-headline']!="" 
         || request.body.result.parameters['source']=="" ? "top-headlines" : "everything")
