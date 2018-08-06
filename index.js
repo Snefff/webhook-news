@@ -42,6 +42,7 @@ server.post('/', function (request, response) {
 })
 
 server.post('/getNews', function (request, response) {
+    console.log(request.body);
     console.log(request.body.intent.inputs);
     var url = "https://newsapi.org/v2/"
         + (request.body.intent.inputs['top-headline']!="" 
