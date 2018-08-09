@@ -1,6 +1,6 @@
 {
-  "name": "Webhook-echo-sample",
-  "description": "Webhook echo sample",
+  "name": "proximity-webhooks",
+  "description": "Proximity (gogowego) webhook",
   "repository": "https://github.com/SunilSyal/Webhook-and-API.AI-Samples.git",
-  "keywords": ["api.ai", "dialogflow", "natural language"]
+  "keywords": ["snips", "Proximity", "natural language","Webhook","Gogowego"]
 }

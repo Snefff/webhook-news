@@ -1,30 +1,32 @@
-# webhook-news
+# Proximity Webhook Example
 
-A very simple webhook designed to interact with dialogFlow.
+A very simple step by step, 10 minutes demo of implementing services using webhook. Whatever user asks your Bot will be sent to your API and then after some processing it'll return the response to the bot, it can be text or even rich messages like cards!.
 
-# How to use
-send a post request to :
-https://webhook-news-api.herokuapp.com/getNews
+This simple app will help you understand
+- How to write a simple Webhhook with NodeJS quickly.
+- How to integrate it to your Virtual Assistant in Proximity.
 
-Request should have this data struct :
-request {
-  body : {
-    result : {
-      parameters : {
-        top-headline : "" // anything else than blank means true
-        sys.language : // fr(default)|en
-        pageSize : number of news returned per page
-        category : //category of the news general(default)|business|entertainment|health|science|sports|technology
-      }
-    }
-  }
-}
+# How it works?
 
-The response will be like :
-response {
-  speech : "",
-  displayText : "",
-  data : [{
-      Anything you want here.
-  }]
-}
+## Custom your code
+
+- Clone this repo.
+- Custom your code.
+- Push the app to Heroku.
+
+## Deploy
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+
+## Link your webhook to Proximity
+
+Go to [Proximity](https://www.gogowego.com/login)
+- Login
+- Create your own Virtual Assistant
+- In parameters, go to Webhook tab and paste your API's URL endpoint. Example of Webhook URL  : https://webhook-proximity-example.herokuapp.com/example
+- Create your first intent and some training phrases. At the bottom, check Handover to API.
+- Test it! Try your Virtual Assistant and start building it's intelligence using Webhook.
+- Enjoy!
+
+
+ 
