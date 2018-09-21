@@ -37,6 +37,19 @@ server.post('/', function (request, response) {
         "displayText": "Hello from /get :)"
     }));
 })
+server.post('/example', function (request, response) {
+    var param = request.body.intent.inputs;
+    console.log(request.body);
+    console.log("-----------------------------------------");
+    console.log("List of your entities : ");
+    Object.keys(param).forEach(element => { console.log(element + " - " + param[element])});
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify({
+        "speech": "Hello from /example :)",
+        "posts": []
+        
+    }));
+})
 
 server.post('/getNews', function (request, response) {
     console.log(request.body);
