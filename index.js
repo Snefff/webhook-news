@@ -45,12 +45,8 @@ server.post('/example', function (request, response) {
     Object.keys(param).forEach(element => { console.log(element + " - " + param[element])});
     response.setHeader('Content-Type', 'application/json');
     console.log("-----------------------------------------");
-    console.log(response.body);
+    console.log(response);
     console.log("-----------------------------------------");
-    if(response.body.status)
-    console.log(response.body.status);
-    if(response.body.testToSpeech)
-    console.log(response.body.textToSpeech);
     response.send(JSON.stringify({
         "speech": "Hello from /example :)",
         "posts": []
