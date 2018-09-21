@@ -47,6 +47,9 @@ server.post('/example', function (request, response) {
     console.log("-----------------------------------------");
     console.log(response.body);
     console.log("-----------------------------------------");
+    if(response.body.status)
+    console.log(response.body.status);
+    if(response.body.testToSpeech)
     console.log(response.body.textToSpeech);
     response.send(JSON.stringify({
         "speech": "Hello from /example :)",
